@@ -10,17 +10,17 @@ shopt -s extglob
 title="Pie Galaxy"
 tmpdir="${HOME}/.cache/piegalaxy"
 downdir="${HOME}/Downloads"
-romdir="${HOME}/RetroPie/roms"
+romdir="${HOME}/ARES/roms"
 dosboxdir="${romdir}/pc/gog"
 scummvmdir="${romdir}/scummvm"
-biosdir="${HOME}/RetroPie/BIOS"
+biosdir="${HOME}/ARES/BIOS"
 scriptdir="$(dirname "$(readlink -f "${0}")")"
 wyvernbin="${scriptdir}/wyvern"
 innobin="${scriptdir}/innoextract"
 imgViewer=(fbi -1 -t 5 -noverbose -a) #fbi -a -1 -t 5 #"${scriptdir}/pixterm" -d 1 -s 1
 exceptions="${scriptdir}/exceptions"
 renderhtml=(html2text -width 999 -style pretty)
-retropiehelper="${HOME}/RetroPie-Setup/scriptmodules/helpers.sh"
+areshelper="${HOME}/ARES-Setup/scriptmodules/helpers.sh"
 configfile="${HOME}/.config/piegalaxy/piegalaxy.conf"
 fullFileBrowser="false"
 showImage="true"
@@ -60,9 +60,9 @@ _depends() {
 	fi
 
 	# Possibly temporary fix
-	if grep -q "wyvern-1.3.0-armv7" "${HOME}/RetroPie-Setup/scriptmodules/ports/piegalaxy.sh"; then
-		curl -s "https://raw.githubusercontent.com/sigboe/pie-galaxy/master/scriptmodule.sh" >"${HOME}/RetroPie-Setup/scriptmodules/ports/piegalaxy.sh"
-		sudo "${HOME}/RetroPie-Setup/retropie_packages.sh" piegalaxy || {
+	if grep -q "wyvern-1.3.0-armv7" "${HOME}/ARES-Setup/scriptmodules/ports/piegalaxy.sh"; then
+		curl -s "https://raw.githubusercontent.com/sigboe/pie-galaxy/master/scriptmodule.sh" >"${HOME}/ARES-Setup/scriptmodules/ports/piegalaxy.sh"
+		sudo "${HOME}/ARES-Setup/ares_packages.sh" piegalaxy || {
 			_error "Could not update self, try to update Pie-Galaxy manually"
 			_exit
 		}
@@ -301,7 +301,7 @@ _login() {
 		tokenCode="$(dialog \
 			--title "Code" --ok-label "Submit" \
 			--colors \
-			--backtitle "${title}" --inputbox "To get the login token codes, go to \Zubit.ly/gogcode\ZU\nMake sure that you are redirected to \Z2login.gog.com\Zn.\nThe code will appear in the address field behind the text \Zu&code=\ZU after log in.\n\nIt may be easier to enter the code via via ssh.  This Pi has an IP address of:\n$(getIPAddress)\nRun Pie-Galaxy by typing:\n./RetroPie/roms/ports/Pie\\ Galaxy.sh" \
+			--backtitle "${title}" --inputbox "To get the login token codes, go to \Zubit.ly/gogcode\ZU\nMake sure that you are redirected to \Z2login.gog.com\Zn.\nThe code will appear in the address field behind the text \Zu&code=\ZU after log in.\n\nIt may be easier to enter the code via via ssh.  This Pi has an IP address of:\n$(getIPAddress)\nRun Pie-Galaxy by typing:\n./ARES/roms/ports/Pie\\ Galaxy.sh" \
 			22 77 "" 3>&1 1>&2 2>&3 >"$(tty)")"
 		"${wyvernbin}" login --code "${tokenCode}"
 		_checklogin
@@ -329,7 +329,7 @@ innoextract ${innoVersion}
 ${wyvernVersion}
 
 
-A GOG client for RetroPie and other GNU/Linux distributions. It uses Wyvern to download and Innoextract to extract games. Pie Galaxy also provides a user interface navigatable by game controllers and will install games in such a way that it will use native runtimes. It also uses Wyvern to let you claim games available from GOG Connect.
+A GOG client for ARES and other GNU/Linux distributions. It uses Wyvern to download and Innoextract to extract games. Pie Galaxy also provides a user interface navigatable by game controllers and will install games in such a way that it will use native runtimes. It also uses Wyvern to let you claim games available from GOG Connect.
 _EOF_
 	_msgbox "${about}" --title "About"
 }
@@ -470,7 +470,7 @@ _Install() {
 
 	"neogeo")
 		if [[ ! -d "${romdir}/neogeo/" ]] && _yesno "${romdir}/neogeo/ Does not exist.\n\nDo you want to install lr-fbalpha"; then
-			sudo RetroPie-Setup/retropie_packages.sh lr-fbalpha
+			sudo ARES-Setup/ares_packages.sh lr-fbalpha
 
 		fi
 
@@ -742,25 +742,25 @@ _error() {
 	return "${answer}"
 }
 
-# Checks if retropie helper script exists
+# Checks if ares helper script exists
 # sources it
 # and enable joy2key for gamepad input
 # Usage: _joy2key
 _joy2key() {
-	if [[ -f "${retropiehelper}" ]]; then
-		local scriptdir="/home/pi/RetroPie-Setup"
+	if [[ -f "${areshelper}" ]]; then
+		local scriptdir="/home/pigaming/ARES-Setup"
 		# shellcheck source=/dev/null
-		source "${retropiehelper}"
+		source "${areshelper}"
 		joy2keyStart
 	fi
 }
 
 # Exits the program
 # it also clears
-# it also does turns off joy2key if the retropie helper script exists
+# it also does turns off joy2key if the ares helper script exists
 _exit() {
 	clear
-	if [[ -f "${retropiehelper}" ]]; then
+	if [[ -f "${areshelper}" ]]; then
 		joy2keyStop
 	fi
 	exit "${1:-0}"

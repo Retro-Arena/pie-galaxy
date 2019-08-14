@@ -18,7 +18,7 @@
     cat <<'_EOF_' >>"${romdir}/ports/Ultimate Doom.sh"
 #!/usr/bin/env bash
 # This file is borrowed from https://raw.githubusercontent.com/crcerror/launch-doom-packs-RP/6479af76bf7909711245763a1c7e707f852d56b2/DOOM%20-%201.sh
-path="/home/pi/RetroPie/roms/ports/doom"
+path="/home/pigaming/ARES/roms/ports/doom"
 wadfile="DOOM.WAD"
 if ! [[ -e "${path}/$wadfile" ]]; then
     echo "Error! ${path}/$wadfile not found!"
@@ -29,13 +29,13 @@ fi
 if [[ -e "${path}/savegames_${wadfile%.*}.zip" ]]; then
     unzip -qq -o "${path}/savegames_${wadfile%.*}.zip" -d "$path"
 fi
-"/opt/retropie/supplementary/runcommand/runcommand.sh" 0 _PORT_ "doom" "${path}/$wadfile"
+"/opt/ares/supplementary/runcommand/runcommand.sh" 0 _PORT_ "doom" "${path}/$wadfile"
 cd "$path" && zip -mj "savegames_${wadfile%.*}.zip" prbmsav?.dsg
 _EOF_
 
     chmod +x "${romdir}/ports/Ultimate Doom.sh" || { _error "Could not create the installation script"; return; }
     if _yesno "${gameName} has been installed to ${romdir}/ports/doom.\nSelect yes to build and use libretro PrBoom as the engine.\nSelect No to skip the build."; then
-        sudo "${HOME}/RetroPie-Setup/retropie_packages.sh" lr-prboom || { _error "Could not install lr-prboom"; return; }
+        sudo "${HOME}/ARES-Setup/ares_packages.sh" lr-prboom || { _error "Could not install lr-prboom"; return; }
     fi
     _msgbox "${gameName} is installed to work with PrBoom, with seperated savgame.\n\nMake sure to enable lr-prboom as your DOOM engine, in the runcommand."
 }
@@ -72,10 +72,10 @@ _EOF_
 
     cat <<'_EOF_' >>"${romdir}/amiga/Wings.uae"
 use_gui=no
-kickstart_rom_file=/home/pi/RetroPie/BIOS/Amiga/kick12.rom
+kickstart_rom_file=/home/pigaming/ARES/BIOS/Amiga/kick12.rom
 kickstart_rom_file_id=A6CE1636,KS ROM v1.2 (A500,A1000,A2000)
-floppy0=/home/pi/RetroPie/roms/amiga/gog/wings-1.adf
-floppy1=/home/pi/RetroPie/roms/amiga/gog/wings-2.adf
+floppy0=/home/pigaming/ARES/roms/amiga/gog/wings-1.adf
+floppy1=/home/pigaming/ARES/roms/amiga/gog/wings-2.adf
 nr_floppies=2
 floppy_speed=800
 _EOF_
@@ -92,10 +92,10 @@ _EOF_
 
     cat <<'_EOF_' >>"${romdir}/amiga/Rocket Ranger.uae"
 use_gui=no
-kickstart_rom_file=/home/pi/RetroPie/BIOS/Amiga/kick12.rom
+kickstart_rom_file=/home/pigaming/ARES/BIOS/Amiga/kick12.rom
 kickstart_rom_file_id=A6CE1636,KS ROM v1.2 (A500,A1000,A2000)
-floppy0=/home/pi/RetroPie/roms/amiga/gog/RocketRanger-1.adf
-floppy1=/home/pi/RetroPie/roms/amiga/gog/RocketRanger-2.adf
+floppy0=/home/pigaming/ARES/roms/amiga/gog/RocketRanger-1.adf
+floppy1=/home/pigaming/ARES/roms/amiga/gog/RocketRanger-2.adf
 nr_floppies=2
 floppy_speed=800
 _EOF_
@@ -112,10 +112,10 @@ _EOF_
     
     cat <<'_EOF_' >>"${romdir}/amiga/Defender of the Crown.uae"   
 use_gui=no
-kickstart_rom_file=/home/pi/RetroPie/BIOS/Amiga/kick12.rom
+kickstart_rom_file=/home/pigaming/ARES/BIOS/Amiga/kick12.rom
 kickstart_rom_file_id=A6CE1636,KS ROM v1.2 (A500,A1000,A2000)
-floppy0=/home/pi/RetroPie/roms/amiga/gog/dotc-1.adf
-floppy1=/home/pi/RetroPie/roms/amiga/gog/dotc-2.adf
+floppy0=/home/pigaming/ARES/roms/amiga/gog/dotc-1.adf
+floppy1=/home/pigaming/ARES/roms/amiga/gog/dotc-2.adf
 nr_floppies=2
 floppy_speed=800
 _EOF_

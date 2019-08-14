@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
-dosboxromdir="${HOME}/RetroPie/roms/pc/gog"
+dosboxromdir="${HOME}/ARES/roms/pc/gog"
 game=$(basename -s .sh "${0}")
 
 # DOSBox settings override
 export DOSBOX_SDL_USESCANCODES=false
 export LC_ALL="C"
 
-if [[ -x "/opt/retropie/emulators/dosbox/bin/dosbox" ]]; then
-	emu="/opt/retropie/emulators/dosbox/bin/dosbox"
+if [[ -x "/opt/ares/emulators/dosbox/bin/dosbox" ]]; then
+	emu="/opt/ares/emulators/dosbox/bin/dosbox"
 fi
 
 if ! [[ -x "$(command -v ${emu:-dosbox})" ]]; then
-        echo 'DOSBox not found but is required for most GOG software.  Try installing the optional package "dosbox" from the RetroPie Setup script.'
+        echo 'DOSBox not found but is required for most GOG software.  Try installing the optional package "dosbox" from the ARES Setup script.'
 	exit 1
 fi
 
