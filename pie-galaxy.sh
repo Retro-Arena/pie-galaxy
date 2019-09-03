@@ -61,7 +61,7 @@ _depends() {
 
 	# Possibly temporary fix
 	if grep -q "wyvern-1.3.0-armv7" "${HOME}/ARES-Setup/scriptmodules/ports/piegalaxy.sh"; then
-		curl -s "https://raw.githubusercontent.com/sigboe/pie-galaxy/master/scriptmodule.sh" >"${HOME}/ARES-Setup/scriptmodules/ports/piegalaxy.sh"
+		curl -s "https://raw.githubusercontent.com/Retro-Arena/pie-galaxy/master/scriptmodule.sh" >"${HOME}/ARES-Setup/scriptmodules/ports/piegalaxy.sh"
 		sudo "${HOME}/ARES-Setup/ares_packages.sh" piegalaxy || {
 			_error "Could not update self, try to update Pie-Galaxy manually"
 			_exit
