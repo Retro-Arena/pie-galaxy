@@ -748,7 +748,7 @@ _error() {
 # Usage: _joy2key
 _joy2key() {
 	if [[ -f "${areshelper}" ]]; then
-		local scriptdir="/home/pigaming/ARES-Setup"
+		local scriptdir="/home/aresuser/ARES-Setup"
 		# shellcheck source=/dev/null
 		source "${areshelper}"
 		joy2keyStart
